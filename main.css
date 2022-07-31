@@ -11,10 +11,22 @@ body.dark-theme div > ul[role="tablist"] > li:first-child
     display: none!important;
 }
 
+/* Adds a border to the following page tablist */
+body.dark-theme div div.common-centered-column div[class*="TabsLayout"]
+{
+    border-bottom: 2px solid #141414!important;
+}
+
 /* Fixes `live` padding on the following page */
 body.dark-theme div > ul[role="tablist"] > li:nth-child(2) > a
 {
     padding-left: 0px!important;
+}
+
+/** Hides offline channels from "live" sidebar */
+body.dark-theme div[class*="avatar--offline"]
+{
+    display: none!important;
 }
 
 /* Darker sidebar */
@@ -48,10 +60,31 @@ body.dark-theme a[class*="Tag"][aria-label][aria-describedby] div[class*="TagTex
     margin-top: -1px!important;
 }
 
-/* Hides prime loot notifier */
+/* Hides prime loot notifier and bits button */
 body.dark-theme nav[data-a-target="top-nav-container"] > div[class*="Layout"] > div[class*="Layout"]:last-child div[class*="top-nav__prime"]
 {
     display: none!important;
+}
+
+body.dark-theme nav[data-a-target="top-nav-container"] > div[class*="Layout"] > div[class*="Layout"]:last-child > div:nth-last-child(2)
+{
+    display: none!important;
+}
+
+/** Darker search box */
+body.dark-theme div[data-a-target="nav-search-box"] input[placeholder]
+{
+    background-color: #101010;
+    border-top: 1px solid #242424;
+    border-left: 1px solid #242424;
+    border-bottom: 1px solid #242424;
+    border-right: 0px solid transparent;
+}
+
+body.dark-theme div[aria-label*="Followed Channels"] div > figure
+{
+    fill: red!important;
+    color: #303030!important;
 }
 
 /* Tweaks the way channel cards look at certain pages */
