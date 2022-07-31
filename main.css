@@ -1,0 +1,176 @@
+/* Hides sidebar contents that isn't followed channels (hides recommended) */
+body.dark-theme div.side-bar-contents > div > div > div[aria-label]:not(:first-child),
+div[aria-label^="Recommended"], div[aria-label^="Viewers"]
+{
+    display: none!important;
+}
+
+/* Hides `overview` from following page */
+body.dark-theme div > ul[role="tablist"] > li:first-child
+{
+    display: none!important;
+}
+
+/* Fixes `live` padding on the following page */
+body.dark-theme div > ul[role="tablist"] > li:nth-child(2) > a
+{
+    padding-left: 0px!important;
+}
+
+/* Darker sidebar */
+body.dark-theme div#sideNav > div:nth-child(1) > div:nth-child(1)
+{
+    background-color: #141414!important;
+    border-right: 1px solid #1a1a1a!important;
+}
+
+/* Sidebar avatars shadowing */
+body.dark-theme div.side-bar-contents div[aria-label*="Channels"]:first-child figure[aria-label][class*="Avatar"] > img
+{
+    box-shadow: 2px 2px 3px rgba(10, 10, 10, 0.85);
+}
+
+/* Change tag colors */
+body.dark-theme a[class*="Tag"][aria-label][aria-describedby]
+{
+    background-color: #141414!important;
+    color: #858585!important;
+}
+
+body.dark-theme a[class*="Tag"][aria-label][aria-describedby]:hover
+{
+    background-color: #191919!important;
+    color: #999999!important;
+}
+
+/* Hides prime loot notifier */
+body.dark-theme nav[data-a-target="top-nav-container"] > div[class*="Layout"] > div[class*="Layout"]:last-child div[class*="top-nav__prime"]
+{
+    display: none!important;
+}
+
+/* Tweaks the way channel cards look at certain pages */
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"]
+{
+    text-align: center!important;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] a > p[data-a-target=preview-card-channel-link],
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] a > h3
+{
+    text-align: left!important;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div > p > a[data-test-selector]
+{
+    font-weight: bold;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div > p
+{
+    border-top: 1px solid #161616!important;
+    padding-top: 4px!important;
+    margin-top: 8px!important;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div > p > a::before
+{
+    content: 'Category: ';
+    font-weight: normal;;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div > p > a
+{
+    margin-bottom: 6px;
+}
+
+/** Add border to channel card previews */
+div.live-channel-card article div[class*="Wrapper-"] > div > a div[class*="Aspect"] img[alt]
+{
+    min-height: calc(100% - 4px)!important;
+    height: calc(100% - 4px)!important;
+    border: 2px solid #141414!important;
+}
+
+/* Edit elements active when watching live streams */
+div.chat-input div.rich-input-container > div:nth-child(2)
+{
+    background-color: #141414!important;
+    border: 1px solid #242424!important;
+}
+
+button[aria-label="Subscribe"]
+{
+    background-color: #262626!important;
+}
+
+p[data-a-target="animated-channel-viewers-count"], div[role="presentation"] > figure > svg
+{
+    font-feature-settings: "tnum";
+    font-weight: normal!important;
+    color: #ff6767!important;
+    fill: transparent!important;
+}
+
+/* Darkens viewer count on stream cards */
+div[class*="ScMediaCardStatWrapper"]
+{
+    background-color: #000000ba!important;
+}
+
+/** Hides share button from under a live stream */
+button[data-a-target="share-button"]
+{
+    display: none!important;
+}
+
+/** Darkens more options button */
+button[data-a-target="report-button-more-button"] div > svg
+{
+    fill: #282828!important;
+}
+
+/** Attempts to hide chat leaderboard */
+section > div.chat-room__content > div:first-child:not([class*="chat-list"]):not([class*="chat-input"])
+{
+    display: none!important;
+}
+
+a.downloadClipButton
+{
+    background-color: #264995;
+    line-height: 28px;
+    border-radius: 4px;
+    font-size: 18px;
+    line-height: 30px;
+    height: 30px;
+    width: 40px;
+    font-weight: bold;
+    margin-right: 12px;
+    cursor: pointer;
+    text-align: center;
+    color: #fff!important;
+    text-decoration: none!important;
+}
+
+a.downloadClipButton:not(.isDownloading)::before
+{
+    content: '🡓';
+}
+
+a.downloadClipButton.isDownloading
+{
+    max-height: 30px!important;
+    line-height: 42px!important;
+    width: 40px!important;
+}
+
+a.downloadClipButton.isDownloading::before
+{
+    content: url("data:image/svg+xml,%3Csvg width='24' height='24' version='1.1' id='L9' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 100 100' enable-background='new 0 0 0 0' xml:space='preserve'%3E%3Cpath fill='rgba(255, 255, 255, 1.0)' d='M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50'%3E%3CanimateTransform attributeName='transform' attributeType='XML' type='rotate' dur='1s' from='0 50 50' to='360 50 50' repeatCount='indefinite' /%3E%3C/path%3E%3C/svg%3E")!important;
+}
+
+a.downloadClipButton:hover
+{
+    background-color: #2e58b1;
+}
