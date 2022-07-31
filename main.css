@@ -146,6 +146,14 @@ section > div.chat-room__content > div:first-child:not([class*="chat-list"]):not
     display: none!important;
 }
 
+/** Remove the hard shadow from the top navigation bar */
+nav[data-a-target="top-nav-container"] > div.top-nav__menu
+{
+    border-bottom: 1px solid #131313!important;
+    box-shadow: 0px 0px 2px #111!important;
+}
+
+/** Clip download button styling */
 a.downloadClipButton
 {
     background-color: #264995;
