@@ -43,6 +43,11 @@ body.dark-theme a[class*="Tag"][aria-label][aria-describedby]:hover
     color: #999999!important;
 }
 
+body.dark-theme a[class*="Tag"][aria-label][aria-describedby] div[class*="TagText"]
+{
+    margin-top: -1px!important;
+}
+
 /* Hides prime loot notifier */
 body.dark-theme nav[data-a-target="top-nav-container"] > div[class*="Layout"] > div[class*="Layout"]:last-child div[class*="top-nav__prime"]
 {
@@ -52,13 +57,18 @@ body.dark-theme nav[data-a-target="top-nav-container"] > div[class*="Layout"] > 
 /* Tweaks the way channel cards look at certain pages */
 body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"]
 {
-    text-align: center!important;
+    text-align: left!important;
 }
 
 body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] a > p[data-a-target=preview-card-channel-link],
 body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] a > h3
 {
     text-align: left!important;
+}
+
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div:first-child
+{
+    margin-bottom: 10px!important;
 }
 
 body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div > p > a[data-test-selector]
