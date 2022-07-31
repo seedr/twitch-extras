@@ -2,15 +2,20 @@
 	"name": "Twitch Extras",
 	"description": "Adds some simple extras to Twitch",
 	"author": "emy",
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"version": "1.0.0",
 	"homepage_url": "https://github.com/seedr/twitch-extras",
 	"icons": {
 		"48": "48.png",
 		"128": "128.png"
 	},
+	"browser_action": {
+		"default_title": "Twitch Extras",
+		"default_icon": "48.png"
+	},
 	"background": {
-		"service_worker": "service.js"
+		"scripts": ["service.js"],
+		"persistent": true
 	},
 	"content_scripts": [{
 		"matches": [
@@ -22,9 +27,8 @@
 		"run_at": "document_idle"
 	}],
 	"permissions": [
-		"downloads"
-	],
-	"host_permissions": [
+		"downloads",
+		"*://*.tiktok.com/*",
 		"*://*.twitchcdn.net/*",
 		"https://twitch.tv/*",
 		"https://*.twitch.tv/*"
