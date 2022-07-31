@@ -18,7 +18,6 @@ declare -a REQUIRES=(
 declare -a HAYSTACK=(
     'chrome.runtime'
     'chrome.downloads'
-    'chrome.tabs'
 )
 
 declare -a REPLACE=(
