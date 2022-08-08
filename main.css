@@ -1,8 +1,16 @@
 /* Hides sidebar contents that isn't followed channels (hides recommended) */
-body.dark-theme div.side-bar-contents > div > div > div[aria-label]:not(:first-child),
-div[aria-label^="Recommended"], div[aria-label^="Viewers"]
+div.side-bar-contents div[aria-label^="Recommended"],
+div.side-bar-contents div[aria-label*="Viewers Also Watch"]
 {
     display: none!important;
+}
+
+/** Adds transparent background color, removes shadows and padding on sidebar elements */
+body.dark-theme div.side-bar-contents > nav div > div[aria-label] > div[class*="Layout-"]
+{
+    background-color: transparent!important;
+    box-shadow: none!important;
+    padding-bottom: 0px!important;
 }
 
 /* Hides `overview` from following page */
@@ -99,6 +107,11 @@ body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWra
     text-align: left!important;
 }
 
+body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] a > p[data-a-target=preview-card-channel-link]
+{
+    margin-top: 4px;
+}
+
 body.dark-theme div.live-channel-card div[class*="Layout"] > div[class*="TextWrapper"] > div:first-child
 {
     margin-bottom: 10px!important;
@@ -142,9 +155,18 @@ div.chat-input div.rich-input-container > div:nth-child(2)
     border: 1px solid #242424!important;
 }
 
-button[aria-label="Subscribe"]
+/** Makes the subscribe button darker so that it doesn't stand as much out */
+body.dark-theme button[class*="CoreButton"][aria-label^="Gift"][data-a-target="subscribed-button"],
+body.dark-theme button[aria-label="Subscribe"], body.dark-theme button[data-a-target="subscribe-button"]
 {
     background-color: #262626!important;
+    
+}
+
+body.dark-theme button[class*="CoreButton"][aria-label^="Gift"][data-a-target="subscribed-button"]:hover,
+body.dark-theme button[aria-label="Subscribe"]:hover, body.dark-theme button[data-a-target="subscribe-button"]:hover
+{
+    background-color: #303030!important;
 }
 
 p[data-a-target="animated-channel-viewers-count"], div[role="presentation"] > figure > svg

@@ -2,10 +2,29 @@
 {
 
     const data = {
-        observers: {}
+        observers: {},
+        timers: {},
+        events: {
+            onUrlChange: []
+        }
     };
 
-    let rTrim = (string, character) =>
+    const pipe = (...messages) =>
+    {
+        console.info(`[TWITCH EXTRAS]`, ...messages)
+    }
+
+	const dispatchEvent = (element, eventType, event) =>
+	{
+		element.dispatchEvent(new eventType(event,
+		{
+			bubbles: true,
+			cancelable: true,
+			view: window
+		}));
+	};
+
+    const rTrim = (string, character) =>
     {
         if(string.substr(string.length - 1) === character)
         {
@@ -96,21 +115,14 @@
                         task: 'fileDownload',
                         filename: filename,
                         url: e.target.getAttribute('href')
-                    }).then((response) =>
+                    }).then(() =>
                     {
-                        if(!response.success)
-                        {
-                            alert('Something went wrong.');
-                        }
-
                         /** Set download state */
                         e.isDownloading = false;
                         e.target.classList.remove('isDownloading');
                     }).catch((error) =>
                     {
-                        alert('Something went wrong.');
-
-                        console.error(error);
+                        pipe('ERROR:', error)
 
                         /** Set download state */
                         e.isDownloading = false;
@@ -156,6 +168,18 @@
 
     let onUrlChange = (url) =>
     {
+        pipe('URL change detected.');
+
+        if(data.events.onUrlChange.length > 0)
+        {
+            (data.events.onUrlChange).forEach((event) =>
+            {
+                event.function(
+                    ...(event.parameters ? event.parameters : [])
+                );
+            });
+        }
+
         /** Clear observers */
         if(data.observers.shareInject)
         {
@@ -198,10 +222,89 @@
         childList: true,
         subtree: true
     };
-    
+
+    /** Claims any bonus channel points */
+    const claimChatBonusPoints = (container) =>
+    {
+        let claimButton = container.querySelector('button[aria-label^="Claim"] div > svg');
+
+        if(claimButton)
+        {
+            dispatchEvent(claimButton, MouseEvent, 'click');
+
+            pipe('Claimed bonus channel points.')
+        }
+    };
+
+    /** Add a `chatInput` detector on URL change (for channel point observing) */
+    data.events.onUrlChange.push({
+        function: () =>
+        {
+            clearInterval(data.timers.chatInputFinder);
+
+            /** Disconnect any already active observer */
+            if(data.observers.channelPointObserver)
+            {
+                data.observers.channelPointObserver.disconnect();
+            }
+
+            data.timers.chatInputFinder = setInterval(() =>
+            {
+                let chatInput = document.querySelector('div.chat-room__content div.chat-input, \
+                    div.chat-room__content div.chat-input');
+
+                /** Chat input has been found */
+                if(chatInput)
+                {
+                    /** Again, disconnect any already active observer */
+                    if(data.observers.channelPointObserver)
+                    {
+                        data.observers.channelPointObserver.disconnect();
+                    }
+
+                    clearInterval(data.timers.chatInputFinder);
+
+                    data.observers.channelPointObserver = new MutationObserver((mutations) =>
+                    {
+                        mutations.forEach(() =>
+                        {
+                            clearTimeout(data.timers.debounceChatInputMutation);
+
+                            /** Add a debounce to the action */
+                            data.timers.debounceChatInputMutation = setTimeout(() =>
+                            {
+                                /** Attempt to claim bonus points */
+                                claimChatBonusPoints(chatInput);
+                            }, 250);
+                        });
+                    });
+                    
+                    data.observers.channelPointObserver.observe(chatInput, {
+                        childList: true,
+                        subtree: true
+                    });
+                }
+            }, 1000);
+        },
+        parameters: []
+    });
+
+    /** Clear any download buttons from the DOM */
+    data.events.onUrlChange.push({
+        function: () =>
+        {
+            let downloadButtons = document.querySelectorAll('div.downloadClipButton');
+
+            if(downloadButtons)
+            {
+                downloadButtons.forEach((element) => element.remove());
+            }
+        }
+    })
+
     observer.observe(document.querySelector('body'), config);
 
     onUrlChange(data.currentUrl);
 
-    console.log('Twitch Extras loaded.');
+    pipe('Twitch Extras loaded.');
 })();
