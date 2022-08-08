@@ -211,6 +211,7 @@ nav[data-a-target="top-nav-container"] > div.top-nav__menu
 /** Clip download button styling */
 a.downloadClipButton
 {
+    display: block;
     background-color: #264995;
     line-height: 28px;
     border-radius: 4px;
