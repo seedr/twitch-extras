@@ -28,7 +28,6 @@
 	}],
 	"permissions": [
 		"downloads",
-		"*://*.tiktok.com/*",
 		"*://*.twitchcdn.net/*",
 		"https://twitch.tv/*",
 		"https://*.twitch.tv/*"

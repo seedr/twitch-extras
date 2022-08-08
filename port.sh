@@ -2,6 +2,7 @@
 
 ###########################################################
 # Ports the Chrome extension to become Firefox compatible.#
+# Requires `web-ext`: sudo npm install --global web-ext   #
 ###########################################################
 
 TIMESTAMP=$(date +'%d_%m_%Y_%H-%M-%N')
@@ -52,3 +53,7 @@ do
         done
     fi
 done
+
+web-ext build --ignore-files "ff_port*" "*.sh" --source-dir="./$OUTPUT" -v -n "$OUTPUT.zip"
+
+rm -rf "$OUTPUT"
